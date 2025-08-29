@@ -2,6 +2,7 @@ package me.pectics.papi.expansion.animations
 
 import me.clip.placeholderapi.expansion.Configurable
 import me.clip.placeholderapi.expansion.PlaceholderExpansion
+import org.bukkit.Bukkit
 import org.bukkit.OfflinePlayer
 
 class AnimationsExpansion : PlaceholderExpansion(), Configurable {
@@ -18,9 +19,17 @@ class AnimationsExpansion : PlaceholderExpansion(), Configurable {
         return BuildConfig.VERSION
     }
 
+    override fun getRequiredPlugin(): String {
+        return "PexilLibs"
+    }
+
+    override fun canRegister(): Boolean {
+        return Bukkit.getPluginManager().getPlugin(requiredPlugin) != null
+    }
+
     override fun onRequest(ignored: OfflinePlayer?, params: String): String? {
         val args = params.split("_", limit = 2)
-        if (args.isEmpty() || args.size < 2) return null
+        if (args.isEmpty()) return null
         return when (args[0].lowercase()) {
             "chaos" -> chaos(getDouble("chaos.probability", CHAOS_PROBABILITY))
             else -> null
