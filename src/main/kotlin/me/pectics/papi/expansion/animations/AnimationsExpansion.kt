@@ -5,6 +5,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion
 import org.bukkit.Bukkit
 import org.bukkit.OfflinePlayer
 
+@Suppress("unused")
 class AnimationsExpansion : PlaceholderExpansion(), Configurable {
 
     override fun getIdentifier(): String {
