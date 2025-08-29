@@ -1,0 +1,36 @@
+package me.pectics.papi.expansion.animations
+
+import me.clip.placeholderapi.expansion.Configurable
+import me.clip.placeholderapi.expansion.PlaceholderExpansion
+import org.bukkit.OfflinePlayer
+
+class AnimationsExpansion : PlaceholderExpansion(), Configurable {
+
+    override fun getIdentifier(): String {
+        return "anim"
+    }
+
+    override fun getAuthor(): String {
+        return "Pectics"
+    }
+
+    override fun getVersion(): String {
+        return BuildConfig.VERSION
+    }
+
+    override fun onRequest(ignored: OfflinePlayer?, params: String): String? {
+        val args = params.split("_", limit = 2)
+        if (args.isEmpty() || args.size < 2) return null
+        return when (args[0].lowercase()) {
+            "chaos" -> chaos(getDouble("chaos.probability", CHAOS_PROBABILITY))
+            else -> null
+        }
+    }
+
+    override fun getDefaults(): Map<String?, Any?>? {
+        return mapOf(
+            "chaos.probability" to CHAOS_PROBABILITY
+        )
+    }
+
+}
