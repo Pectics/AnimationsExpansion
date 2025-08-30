@@ -39,6 +39,7 @@ class AnimationsExpansion : PlaceholderExpansion(), Configurable {
 
     override fun getDefaults(): Map<String?, Any?>? {
         return mapOf(
+            "minimessage_format" to true,
             "chaos.probability" to CHAOS_PROBABILITY
         )
     }
